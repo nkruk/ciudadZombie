@@ -18,10 +18,23 @@ var Juego = {
   ganador: false,
 
   obstaculosCarretera: [
-    /*Aca se van a agregar los obstaculos visibles. Tenemos una valla horizontal
-    de ejemplo, pero podras agregar muchos mas. */
-    new Obstaculo('imagenes/valla_horizontal.png', 70, 430, 30, 30, 1)
-
+    /*Aca se van a agregar los obstaculos visibles. */
+    new Obstaculo('imagenes/valla_horizontal.png', 70, 430, 30, 30, 1),
+    new Obstaculo('imagenes/valla_horizontal.png', 100, 430, 30, 30, 1),
+    new Obstaculo('imagenes/valla_horizontal.png', 130, 430, 30, 30, 1),
+    new Obstaculo('imagenes/valla_horizontal.png', 130, 100, 30, 30, 1),
+    new Obstaculo('imagenes/valla_horizontal.png', 160, 100, 30, 30, 1),
+    new Obstaculo('imagenes/auto_verde_abajo.png', 180, 230, 15, 30, 1),
+    new Obstaculo('imagenes/bache.png', 180, 290, 30, 30, 1),
+    new Obstaculo('imagenes/valla_vertical.png', 180, 460, 30, 30, 1),
+    new Obstaculo('imagenes/bache.png', 300, 485, 30, 30, 1),
+    new Obstaculo('imagenes/auto_verde_derecha.png', 380, 475, 30, 15, 1),
+    new Obstaculo('imagenes/valla_vertical.png', 490, 450, 30, 30, 1),
+    new Obstaculo('imagenes/valla_vertical.png', 490, 480, 30, 30, 1),
+    new Obstaculo('imagenes/valla_horizontal.png', 520, 420, 30, 30, 1),
+    new Obstaculo('imagenes/bache.png', 510, 130, 30, 30, 1),
+    new Obstaculo('imagenes/bache.png', 810, 420, 30, 30, 1),
+    new Obstaculo('imagenes/auto_verde_abajo.png', 860, 390, 15, 30, 1)
   ],
   /* Estos son los bordes con los que se puede chocar, por ejemplo, la vereda.
    Ya estan ubicados en sus lugares correspondientes. Ya aparecen en el mapa, ya
@@ -44,7 +57,14 @@ var Juego = {
   ],
   // Los enemigos se agregaran en este arreglo.
   enemigos: [
-
+    new ZombieConductor('imagenes/tren_vertical.png',644,0,30,90,5, {desdeX: 644, hastaX: 644, desdeY: 0, hastaY: 961},"v"),
+    new ZombieConductor('imagenes/tren_vertical.png',678,0,30,90,5, {desdeX: 678, hastaX: 678, desdeY: 0, hastaY: 961},"v"),
+    new ZombieConductor('imagenes/tren_horizontal.png',400,322,90,30,5,{desdeX: 0, hastaX: 577, desdeY: 322, hastaY: 322},"h"),
+    new ZombieCaminante('imagenes/zombie1.png',100,410,10,10, 1, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961}),
+    new ZombieCaminante('imagenes/zombie2.png',120,410,10,10, 1, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961}),
+    new ZombieCaminante('imagenes/zombie3.png',140,410,10,10, 1, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961}),
+    new ZombieCaminante('imagenes/zombie4.png',180,440,10,10, 1, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961}),
+    new ZombieCaminante('imagenes/zombie1.png',160,390,10,10, 1, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961}),
   ]
 
 }
@@ -106,34 +126,36 @@ Juego.update = function() {
   this.moverEnemigos();
 }
 // Captura las teclas y si coincide con alguna de las flechas tiene que
-// hacer que el jugador principal se mueva
+// hacer que el jugador principal se mueva. 
 Juego.capturarMovimiento = function(tecla) {
   var movX = 0;
   var movY = 0;
   var velocidad = this.jugador.velocidad;
 
   // El movimiento esta determinado por la velocidad del jugador
-  if (tecla == 'izq') {
+  if (tecla == 'der') {
     movX = -velocidad;
   }
-  if (tecla == 'arriba') {
+  if (tecla == 'abajo') {
     movY = -velocidad;
   }
-  if (tecla == 'der') {
+  if (tecla == 'izq') {
     movX = velocidad;
   }
-  if (tecla == 'abajo') {
+  if (tecla == 'arriba') {
     movY = velocidad;
   }
 
   // Si se puede mover hacia esa posicion hay que hacer efectivo este movimiento
   if (this.chequearColisiones(movX + this.jugador.x, movY + this.jugador.y)) {
     /* Aca tiene que estar la logica para mover al jugador invocando alguno
-    de sus metodos  */
-
-    /* COMPLETAR */
-  }
+    de sus metodos. Punto B, guía 2. */
+    Jugador.mover(movX, movY, tecla, true);
+    } else {
+      Jugador.mover(movX, movY, tecla, false);
+    }
 };
+
 
 Juego.dibujar = function() {
   // Borrar el fotograma actual
@@ -141,12 +163,9 @@ Juego.dibujar = function() {
   //Se pinta la imagen de fondo segun el estado del juego
   this.dibujarFondo();
 
+  /* "Dibujante dibuja al jugador"  Punto A, guía 2.*/
 
-  /* Aca hay que agregar la logica para poder dibujar al jugador principal
-  utilizando al dibujante y los metodos que nos brinda.
-  "Dibujante dibuja al jugador" */
-
-  /* Completar */
+  Dibujante.dibujarEntidad(Jugador);
 
   // Se recorren los obstaculos de la carretera pintandolos
   this.obstaculosCarretera.forEach(function(obstaculo) {
@@ -155,26 +174,28 @@ Juego.dibujar = function() {
 
   // Se recorren los enemigos pintandolos
   this.enemigos.forEach(function(enemigo) {
-    /* Completar */
+    Dibujante.dibujarEntidad(enemigo);
   });
 
   // El dibujante dibuja las vidas del jugador
   var tamanio = this.anchoCanvas / this.vidasInicial;
   Dibujante.dibujarRectangulo('white', 0, 0, this.anchoCanvas, 8);
   for (var i = 0; i < this.jugador.vidas; i++) {
-    var x = tamanio * i
+    var x = tamanio * i;
     Dibujante.dibujarRectangulo('red', x, 0, tamanio, 8);
   }
+  Dibujante.dibujarRectangulo("yellow",770,530,110,30);
 };
-
-
 
 /* Recorre los enemigos haciendo que se muevan. De la misma forma que hicimos
 un recorrido por los enemigos para dibujarlos en pantalla ahora habra que hacer
 una funcionalidad similar pero para que se muevan.*/
 Juego.moverEnemigos = function() {
-  /* COMPLETAR */
-};
+  this.enemigos.forEach(function(enemigo) {
+    var direccion = enemigo.direccion;
+    enemigo.mover(direccion);
+  }, this.enemigos);
+}, 
 
 /* Recorre los enemigos para ver cual esta colisionando con el jugador
 Si colisiona empieza el ataque el zombie, si no, deja de atacar.
@@ -192,21 +213,17 @@ Juego.calcularAtaques = function() {
   }, this);
 };
 
-
-
 /* Aca se chequea si el jugador se peude mover a la posicion destino.
- Es decir, que no haya obstaculos que se interpongan. De ser asi, no podra moverse */
+ Es decir, que no haya obstaculos que se interpongan. De ser asi, no podra moverse. Paso 2, guía 3 */
 Juego.chequearColisiones = function(x, y) {
-  var puedeMoverse = true
+  var puedeMoverse = true;
   this.obstaculos().forEach(function(obstaculo) {
     if (this.intersecan(obstaculo, this.jugador, x, y)) {
-
-      /*COMPLETAR, obstaculo debe chocar al jugador*/
-
-      puedeMoverse = false
+      obstaculo.chocar();
+      puedeMoverse = false;
     }
   }, this)
-  return puedeMoverse
+  return puedeMoverse;
 };
 
 /* Este metodo chequea si los elementos 1 y 2 si cruzan en x e y
@@ -253,7 +270,6 @@ Juego.ganoJuego = function() {
 Juego.iniciarRecursos();
 
 // Activa las lecturas del teclado al presionar teclas
-// Documentacion: https://developer.mozilla.org/es/docs/Web/API/EventTarget/addEventListener
 document.addEventListener('keydown', function(e) {
   var allowedKeys = {
     37: 'izq',

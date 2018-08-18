@@ -1,6 +1,6 @@
 /* Enemigo sera un objeto que tiene las funcionalidades basicas de todo Enemigo
 en el juego. Pero no va a existir realmente en nuestro juego. Solo existiran
-instancias que tengan de protitipo a este objeto. Por ejemplo, zombies. Si se te
+instancias que tengan de prototipo a este objeto. Por ejemplo, zombies. Si se te
 ocurren nuevos enemigos para agregar y queres ser un Hacker, podes hacerlo!
 
 Los parametros que recibe para su construccion son los siguientes:
