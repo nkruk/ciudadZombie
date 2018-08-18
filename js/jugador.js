@@ -50,28 +50,28 @@ var Jugador = {
           this.ancho = 30;
           this.alto = 15;
           this.lastValidDirection = "der";
-          this.x -= 20;
+          this.x -= 30;
           break;
         case "abajo":
           this.sprite = "imagenes/auto_rojo_abajo.png";
           this.ancho = 15;
           this.alto = 30;
           this.lastValidDirection = "abajo";
-          this.y -= 20;
+          this.y -= 30;
           break;
         case "izq":
           this.sprite = "imagenes/auto_rojo_izquierda.png";
           this.ancho = 30;
           this.alto = 15;
           this.lastValidDirection = "izq";
-          this.x += 20;
+          this.x += 30;
           break;
         case "arriba":
           this.sprite = "imagenes/auto_rojo_arriba.png";
           this.ancho = 15;
           this.alto = 30;
           this.lastValidDirection = "arriba";
-          this.y += 20;
+          this.y += 30;
           break;
         } 
 

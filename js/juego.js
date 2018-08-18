@@ -57,14 +57,14 @@ var Juego = {
   ],
   // Los enemigos se agregaran en este arreglo.
   enemigos: [
-    new ZombieConductor('imagenes/tren_vertical.png',644,0,30,90,5, {desdeX: 644, hastaX: 644, desdeY: 0, hastaY: 961},"v"),
-    new ZombieConductor('imagenes/tren_vertical.png',678,0,30,90,5, {desdeX: 678, hastaX: 678, desdeY: 0, hastaY: 961},"v"),
-    new ZombieConductor('imagenes/tren_horizontal.png',400,322,90,30,5,{desdeX: 0, hastaX: 577, desdeY: 322, hastaY: 322},"h"),
-    new ZombieCaminante('imagenes/zombie1.png',100,410,10,10, 1, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961}),
-    new ZombieCaminante('imagenes/zombie2.png',120,410,10,10, 1, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961}),
-    new ZombieCaminante('imagenes/zombie3.png',140,410,10,10, 1, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961}),
-    new ZombieCaminante('imagenes/zombie4.png',180,440,10,10, 1, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961}),
-    new ZombieCaminante('imagenes/zombie1.png',160,390,10,10, 1, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961}),
+    new ZombieConductor('imagenes/tren_vertical.png',644,0,30,90,5, {desdeX: 644, hastaX: 644, desdeY: 0, hastaY: 800},"v"),
+    new ZombieConductor('imagenes/tren_vertical.png',678,0,30,90,5, {desdeX: 678, hastaX: 678, desdeY: 0, hastaY: 977},"v"),
+    new ZombieConductor('imagenes/tren_horizontal.png',400,322,90,30,5,{desdeX: 0, hastaX: 961, desdeY: 322, hastaY: 322},"h"),
+    new ZombieCaminante('imagenes/zombie1.png',100,470,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie2.png',120,450,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie3.png',140,410,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie4.png',180,440,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie1.png',160,390,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
   ]
 
 }
@@ -192,9 +192,8 @@ un recorrido por los enemigos para dibujarlos en pantalla ahora habra que hacer
 una funcionalidad similar pero para que se muevan.*/
 Juego.moverEnemigos = function() {
   this.enemigos.forEach(function(enemigo) {
-    var direccion = enemigo.direccion;
-    enemigo.mover(direccion);
-  }, this.enemigos);
+    enemigo.mover();
+  });
 }, 
 
 /* Recorre los enemigos para ver cual esta colisionando con el jugador
@@ -204,11 +203,9 @@ se ven las colisiones con los obstaculos. En este caso sera con los zombies. */
 Juego.calcularAtaques = function() {
   this.enemigos.forEach(function(enemigo) {
     if (this.intersecan(enemigo, this.jugador, this.jugador.x, this.jugador.y)) {
-      /* Si el enemigo colisiona debe empezar su ataque
-      COMPLETAR */
+      enemigo.comenzarAtaque(this.jugador);
     } else {
-      /* Sino, debe dejar de atacar
-      COMPLETAR */
+      enemigo.dejarDeAtacar();
     }
   }, this);
 };
