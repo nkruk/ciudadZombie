@@ -134,26 +134,26 @@ Juego.capturarMovimiento = function(tecla) {
 
   // El movimiento esta determinado por la velocidad del jugador
   if (tecla == 'der') {
-    movX = -velocidad;
-  }
-  if (tecla == 'abajo') {
-    movY = -velocidad;
-  }
-  if (tecla == 'izq') {
     movX = velocidad;
   }
-  if (tecla == 'arriba') {
+  if (tecla == 'abajo') {
     movY = velocidad;
+  }
+  if (tecla == 'izq') {
+    movX = -velocidad;
+  }
+  if (tecla == 'arriba') {
+    movY = -velocidad;
   }
 
   // Si se puede mover hacia esa posicion hay que hacer efectivo este movimiento
   if (this.chequearColisiones(movX + this.jugador.x, movY + this.jugador.y)) {
     /* Aca tiene que estar la logica para mover al jugador invocando alguno
     de sus metodos. Punto B, guía 2. */
-    Jugador.mover(movX, movY, tecla, true);
-    } else {
+    Jugador.mover(movX, movY, tecla);
+    } /* else {
       Jugador.mover(movX, movY, tecla, false);
-    }
+    } */
 };
 
 
