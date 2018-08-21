@@ -25,16 +25,18 @@ var Juego = {
     new Obstaculo('imagenes/valla_horizontal.png', 130, 100, 30, 30, 1),
     new Obstaculo('imagenes/valla_horizontal.png', 160, 100, 30, 30, 1),
     new Obstaculo('imagenes/auto_verde_abajo.png', 180, 230, 15, 30, 1),
-    new Obstaculo('imagenes/bache.png', 180, 290, 30, 30, 1),
+    new Obstaculo('imagenes/bache.png', 110, 290, 30, 30, 1),
     new Obstaculo('imagenes/valla_vertical.png', 180, 460, 30, 30, 1),
     new Obstaculo('imagenes/bache.png', 300, 485, 30, 30, 1),
     new Obstaculo('imagenes/auto_verde_derecha.png', 380, 475, 30, 15, 1),
     new Obstaculo('imagenes/valla_vertical.png', 490, 450, 30, 30, 1),
     new Obstaculo('imagenes/valla_vertical.png', 490, 480, 30, 30, 1),
     new Obstaculo('imagenes/valla_horizontal.png', 520, 420, 30, 30, 1),
-    new Obstaculo('imagenes/bache.png', 510, 130, 30, 30, 1),
-    new Obstaculo('imagenes/bache.png', 810, 420, 30, 30, 1),
-    new Obstaculo('imagenes/auto_verde_abajo.png', 860, 390, 15, 30, 1)
+    new Obstaculo('imagenes/bache.png', 500, 110, 30, 30, 1),
+    new Obstaculo('imagenes/bache.png', 780, 120, 30, 30, 1),
+    new Obstaculo('imagenes/auto_verde_abajo.png', 860, 390, 15, 30, 1),    
+    new Obstaculo('imagenes/bache.png', 780, 300, 30, 30, 1),
+    new Obstaculo('imagenes/bache.png', 310, 150, 30, 30, 1),
   ],
   /* Estos son los bordes con los que se puede chocar, por ejemplo, la vereda.
    Ya estan ubicados en sus lugares correspondientes. Ya aparecen en el mapa, ya
@@ -65,6 +67,15 @@ var Juego = {
     new ZombieCaminante('imagenes/zombie3.png',140,410,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
     new ZombieCaminante('imagenes/zombie4.png',180,440,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
     new ZombieCaminante('imagenes/zombie1.png',160,390,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie1.png',500,170,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie2.png',520,200,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie3.png',540,220,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie4.png',580,240,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie1.png',600,290,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie2.png',620,300,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie3.png',640,420,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie4.png',630,380,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie1.png',610,300,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
   ]
 
 }
