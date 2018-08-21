@@ -36,9 +36,9 @@ ZombieCaminante.prototype.mover = function() {
     this.velocidad *= -1;
   }  
   // Si sobrepasa el rangoY, lo manda al centro entre ambos rangos
-/*   if ((this.y < this.rangoMov.desdeY) || (this.y > this.rangoMov.hastaY)) {
+  if ((this.y < this.rangoMov.desdeY) || (this.y > this.rangoMov.hastaY)) {
     this.y = this.rangoMov.desdeY + (this.rangoMov.hastaY - this.rangoMov.desdeY)/2;
-  } */
+  } 
 }
 
 /* El ataque lo toma de su prototipo Enemigo que ya implementa un metodo atacar

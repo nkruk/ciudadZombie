@@ -16,6 +16,7 @@ var Juego = {
   vidasInicial: Jugador.vidas,
   // Indica si el jugador gano
   ganador: false,
+  backgroundMusic: undefined,
 
   obstaculosCarretera: [
     /*Aca se van a agregar los obstaculos visibles. */
@@ -103,9 +104,12 @@ Juego.iniciarRecursos = function() {
     'imagenes/auto_rojo_derecha.png',
     'imagenes/auto_rojo_izquierda.png',
     'imagenes/auto_verde_abajo.png',
-    'imagenes/auto_verde_derecha.png'
+    'imagenes/auto_verde_derecha.png',
+    "imagenes/mensaje1.png",
+    "imagenes/mensaje2.png",
+ /*    "sound/music.mp3" */
   ]);
-  Resources.onReady(this.comenzar.bind(Juego));
+  Resources.onReady(this.presentacion.bind(Juego));
 };
 
 // Agrega los bordes de las veredas a los obstaculos de la carretera
@@ -113,9 +117,50 @@ Juego.obstaculos = function() {
   return this.obstaculosCarretera.concat(this.bordes);
 };
 
+Juego.sound = function(src) {
+  this.sound = document.createElement("audio");
+  this.sound.src = src;
+  this.sound.setAttribute("preload", "auto");
+  this.sound.setAttribute("controls", "none");
+  this.sound.style.display = "none";
+  document.body.appendChild(this.sound);
+  this.play = function(){
+      this.sound.play();
+  }
+  this.stop = function(){
+      this.sound.pause();
+  }
+};
+
+Juego.presentacion = function() {
+  function borrarMensaje1() {
+    Dibujante.borrarAreaDeJuego();
+  };
+
+  function apareceMensaje2() {
+    Dibujante.dibujarImagen('imagenes/mensaje2.png', 0, 5, 961, 577);
+  };
+
+  function comienzaJuego() {
+    Juego.comenzar();
+  }
+
+  Dibujante.inicializarCanvas(this.anchoCanvas, this.altoCanvas);
+  Dibujante.dibujarImagen('imagenes/mensaje1.png', 0, 5, 961, 577);
+  setTimeout(borrarMensaje1, 3000);
+  setTimeout(apareceMensaje2, 3001);
+  setTimeout(comienzaJuego, 6000);
+};
+
 Juego.comenzar = function() {
   // Inicializar el canvas del juego
+  // console.log(this.backgroundMusic);
+  // this.backgroundMusic = new sound("sound/music.mp3");
+  // console.log(this.backgroundMusic);
+  // this.backgroundMusic.play();
+
   Dibujante.inicializarCanvas(this.anchoCanvas, this.altoCanvas);
+
   /* El bucle principal del juego se llamara continuamente para actualizar
   los movimientos y el pintado de la pantalla. Sera el encargado de calcular los
   ataques, colisiones, etc*/
@@ -196,6 +241,7 @@ Juego.dibujar = function() {
     Dibujante.dibujarRectangulo('red', x, 0, tamanio, 8);
   }
   Dibujante.dibujarRectangulo("yellow",770,530,110,30);
+
 };
 
 /* Recorre los enemigos haciendo que se muevan. De la misma forma que hicimos
