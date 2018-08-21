@@ -105,8 +105,8 @@ Juego.iniciarRecursos = function() {
     'imagenes/auto_rojo_izquierda.png',
     'imagenes/auto_verde_abajo.png',
     'imagenes/auto_verde_derecha.png',
-    "imagenes/mensaje1.png",
-    "imagenes/mensaje2.png",
+    "imagenes/Mensaje1.png",
+    "imagenes/Mensaje2.png",
  /*    "sound/music.mp3" */
   ]);
   Resources.onReady(this.presentacion.bind(Juego));
@@ -138,7 +138,7 @@ Juego.presentacion = function() {
   };
 
   function apareceMensaje2() {
-    Dibujante.dibujarImagen('imagenes/mensaje2.png', 0, 5, 961, 577);
+    Dibujante.dibujarImagen('imagenes/Mensaje2.png', 0, 5, 961, 577);
   };
 
   function comienzaJuego() {
@@ -146,7 +146,7 @@ Juego.presentacion = function() {
   }
 
   Dibujante.inicializarCanvas(this.anchoCanvas, this.altoCanvas);
-  Dibujante.dibujarImagen('imagenes/mensaje1.png', 0, 5, 961, 577);
+  Dibujante.dibujarImagen('imagenes/Mensaje1.png', 0, 5, 961, 577);
   setTimeout(borrarMensaje1, 3000);
   setTimeout(apareceMensaje2, 3001);
   setTimeout(comienzaJuego, 6000);
