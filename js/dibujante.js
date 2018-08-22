@@ -37,4 +37,5 @@ var Dibujante = {
     ctx.fillStyle = color;
     ctx.fillRect(x, y, ancho, alto);
   },
+
 }

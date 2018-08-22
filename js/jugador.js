@@ -41,5 +41,6 @@ var Jugador = {
 
   perderVidas: function(vidasPerdidas) {
     this.vidas -= vidasPerdidas;
+    Juego.scream.play();
     }
 };

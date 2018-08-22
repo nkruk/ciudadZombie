@@ -17,6 +17,7 @@ var Juego = {
   // Indica si el jugador gano
   gameOver: false,
   backgroundMusic: undefined,
+  scream: undefined,
 
   obstaculosCarretera: [
     /*Aca se van a agregar los obstaculos visibles. */
@@ -25,17 +26,17 @@ var Juego = {
     new Obstaculo('imagenes/valla_horizontal.png', 130, 430, 30, 30, 1),
     new Obstaculo('imagenes/valla_horizontal.png', 130, 100, 30, 30, 1),
     new Obstaculo('imagenes/valla_horizontal.png', 160, 100, 30, 30, 1),
-    new Obstaculo('imagenes/auto_verde_abajo.png', 180, 230, 15, 30, 1),
+    new Obstaculo('imagenes/auto_verde_abajo.png', 100, 230, 15, 30, 1),
     new Obstaculo('imagenes/bache.png', 110, 290, 30, 30, 1),
     new Obstaculo('imagenes/valla_vertical.png', 180, 460, 30, 30, 1),
     new Obstaculo('imagenes/bache.png', 300, 485, 30, 30, 1),
-    new Obstaculo('imagenes/auto_verde_derecha.png', 380, 475, 30, 15, 1),
+    new Obstaculo('imagenes/auto_verde_derecha.png', 340, 415, 30, 15, 1),
     new Obstaculo('imagenes/valla_vertical.png', 490, 450, 30, 30, 1),
     new Obstaculo('imagenes/valla_vertical.png', 490, 480, 30, 30, 1),
     new Obstaculo('imagenes/valla_horizontal.png', 520, 420, 30, 30, 1),
     new Obstaculo('imagenes/bache.png', 500, 110, 30, 30, 1),
     new Obstaculo('imagenes/bache.png', 780, 120, 30, 30, 1),
-    new Obstaculo('imagenes/auto_verde_abajo.png', 860, 390, 15, 30, 1),    
+    new Obstaculo('imagenes/auto_verde_abajo.png', 800, 390, 15, 30, 1),    
     new Obstaculo('imagenes/bache.png', 780, 300, 30, 30, 1),
     new Obstaculo('imagenes/bache.png', 310, 150, 30, 30, 1),
   ],
@@ -60,23 +61,25 @@ var Juego = {
   ],
   // Los enemigos se agregaran en este arreglo.
   enemigos: [
-    new ZombieConductor('imagenes/tren_vertical.png',644,0,30,90,5, {desdeX: 644, hastaX: 644, desdeY: 0, hastaY: 800},"v"),
-    new ZombieConductor('imagenes/tren_vertical.png',678,0,30,90,5, {desdeX: 678, hastaX: 678, desdeY: 0, hastaY: 977},"v"),
-    new ZombieConductor('imagenes/tren_horizontal.png',400,322,90,30,5,{desdeX: 0, hastaX: 961, desdeY: 322, hastaY: 322},"h"),
-    new ZombieCaminante('imagenes/zombie1.png',100,470,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
-    new ZombieCaminante('imagenes/zombie2.png',120,450,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
-    new ZombieCaminante('imagenes/zombie3.png',140,410,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
-    new ZombieCaminante('imagenes/zombie4.png',180,440,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
-    new ZombieCaminante('imagenes/zombie1.png',160,390,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
-    new ZombieCaminante('imagenes/zombie1.png',500,170,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
-    new ZombieCaminante('imagenes/zombie2.png',520,200,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
-    new ZombieCaminante('imagenes/zombie3.png',540,220,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
-    new ZombieCaminante('imagenes/zombie4.png',580,240,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
-    new ZombieCaminante('imagenes/zombie1.png',600,290,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
-    new ZombieCaminante('imagenes/zombie2.png',620,300,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
-    new ZombieCaminante('imagenes/zombie3.png',640,420,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
-    new ZombieCaminante('imagenes/zombie4.png',630,380,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
-    new ZombieCaminante('imagenes/zombie1.png',610,300,10,10, 1, {desdeX: 0, hastaX: 634, desdeY: 0, hastaY: 577}),
+    new ZombieConductor('imagenes/tren_vertical.png',644,0,30,90,10, {desdeX: 644, hastaX: 644, desdeY: 0, hastaY: 800},"v"),
+    new ZombieConductor('imagenes/tren_vertical.png',678,0,30,90,10, {desdeX: 678, hastaX: 678, desdeY: 0, hastaY: 977},"v"),
+    new ZombieConductor('imagenes/tren_horizontal.png',400,322,90,30,10,{desdeX: 0, hastaX: 961, desdeY: 322, hastaY: 322},"h"),
+    new ZombieCaminante('imagenes/zombie1.png',100,470,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie2.png',120,450,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie3.png',140,410,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie4.png',180,440,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie1.png',160,390,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie1.png',500,170,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie2.png',520,200,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie3.png',540,220,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie4.png',580,240,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie1.png',600,290,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie2.png',620,300,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie3.png',640,420,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie4.png',630,380,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie1.png',610,300,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
+    new ZombieCaminante('imagenes/zombie4.png',780,500,30,30, 7, {desdeX: 780, hastaX: 900, desdeY: 0, hastaY: 577}),
+
   ]
 
 }
@@ -107,7 +110,6 @@ Juego.iniciarRecursos = function() {
     'imagenes/auto_verde_derecha.png',
     "imagenes/Mensaje1.png",
     "imagenes/Mensaje2.png",
- /*    "sound/music.mp3" */
   ]);
   Resources.onReady(this.presentacion.bind(Juego));
 };
@@ -115,21 +117,6 @@ Juego.iniciarRecursos = function() {
 // Agrega los bordes de las veredas a los obstaculos de la carretera
 Juego.obstaculos = function() {
   return this.obstaculosCarretera.concat(this.bordes);
-};
-
-Juego.sound = function(src) {
-  this.sound = document.createElement("audio");
-  this.sound.src = src;
-  this.sound.setAttribute("preload", "auto");
-  this.sound.setAttribute("controls", "none");
-  this.sound.style.display = "none";
-  document.body.appendChild(this.sound);
-  this.play = function(){
-      this.sound.play();
-  }
-  this.stop = function(){
-      this.sound.pause();
-  }
 };
 
 Juego.presentacion = function() {
@@ -144,20 +131,36 @@ Juego.presentacion = function() {
   function comienzaJuego() {
     Juego.comenzar();
   }
+  
 
   Dibujante.inicializarCanvas(this.anchoCanvas, this.altoCanvas);
+
+  var Sound = function(src) {
+    this.audioElement = document.createElement("audio");
+    this.audioElement.src = src;
+    this.audioElement.setAttribute("preload", "auto");
+    this.audioElement.setAttribute("controls", "none");
+    this.audioElement.style.display = "none";
+    document.body.appendChild(this.audioElement);
+    this.play = function(){
+        this.audioElement.play();
+    }
+    this.stop = function(){
+        this.audioElement.pause();
+    }
+  };
+
+  this.backgroundMusic = new Sound("sound/music.mp3");
+  this.scream = new Sound("sound/scream.mp3");
+
   Dibujante.dibujarImagen('imagenes/Mensaje1.png', 0, 5, 961, 577);
   setTimeout(borrarMensaje1, 3000);
   setTimeout(apareceMensaje2, 3001);
-  setTimeout(comienzaJuego, 6800);
+  setTimeout(comienzaJuego, 5500);
 };
 
 Juego.comenzar = function() {
   // Inicializar el canvas del juego
-  // console.log(this.backgroundMusic);
-  // this.backgroundMusic = new sound("sound/music.mp3");
-  // console.log(this.backgroundMusic);
-  // this.backgroundMusic.play();
 
   Dibujante.inicializarCanvas(this.anchoCanvas, this.altoCanvas);
 
@@ -184,11 +187,15 @@ Juego.update = function() {
 // Captura las teclas y si coincide con alguna de las flechas tiene que
 // hacer que el jugador principal se mueva. 
 Juego.capturarMovimiento = function(tecla) {
+
   var movX = 0;
   var movY = 0;
   var velocidad = this.jugador.velocidad;
 
   // El movimiento esta determinado por la velocidad del jugador
+  if (tecla) {
+      this.backgroundMusic.play();
+  }
   if (tecla == 'der') {
     movX = velocidad;
   }
