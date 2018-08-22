@@ -15,7 +15,7 @@ var Juego = {
   jugador: Jugador,
   vidasInicial: Jugador.vidas,
   // Indica si el jugador gano
-  ganador: false,
+  gameOver: false,
   backgroundMusic: undefined,
 
   obstaculosCarretera: [
@@ -105,8 +105,8 @@ Juego.iniciarRecursos = function() {
     'imagenes/auto_rojo_izquierda.png',
     'imagenes/auto_verde_abajo.png',
     'imagenes/auto_verde_derecha.png',
-    "imagenes/Mensaje1.png",
-    "imagenes/Mensaje2.png",
+    "imagenes/mensaje1.png",
+    "imagenes/mensaje2.png",
  /*    "sound/music.mp3" */
   ]);
   Resources.onReady(this.presentacion.bind(Juego));
@@ -138,7 +138,7 @@ Juego.presentacion = function() {
   };
 
   function apareceMensaje2() {
-    Dibujante.dibujarImagen('imagenes/Mensaje2.png', 0, 5, 961, 577);
+    Dibujante.dibujarImagen('imagenes/mensaje2.png', 0, 5, 961, 577);
   };
 
   function comienzaJuego() {
@@ -146,10 +146,10 @@ Juego.presentacion = function() {
   }
 
   Dibujante.inicializarCanvas(this.anchoCanvas, this.altoCanvas);
-  Dibujante.dibujarImagen('imagenes/Mensaje1.png', 0, 5, 961, 577);
+  Dibujante.dibujarImagen('imagenes/mensaje1.png', 0, 5, 961, 577);
   setTimeout(borrarMensaje1, 3000);
   setTimeout(apareceMensaje2, 3001);
-  setTimeout(comienzaJuego, 6000);
+  setTimeout(comienzaJuego, 6800);
 };
 
 Juego.comenzar = function() {
@@ -219,7 +219,8 @@ Juego.dibujar = function() {
   //Se pinta la imagen de fondo segun el estado del juego
   this.dibujarFondo();
 
-  /* "Dibujante dibuja al jugador"  Punto A, guía 2.*/
+  /* "Dibujante dibuja al jugador"  Si perdió no vuelve a pintar los objetos del juego. */
+  if (!this.gameOver) {
 
   Dibujante.dibujarEntidad(Jugador);
 
@@ -242,6 +243,7 @@ Juego.dibujar = function() {
   }
   Dibujante.dibujarRectangulo("yellow",770,530,110,30);
 
+}
 };
 
 /* Recorre los enemigos haciendo que se muevan. De la misma forma que hicimos
@@ -299,12 +301,14 @@ Juego.intersecan = function(elemento1, elemento2, x, y) {
 Juego.dibujarFondo = function() {
   // Si se termino el juego hay que mostrar el mensaje de game over de fondo
   if (this.terminoJuego()) {
+    this.gameOver = true;
     Dibujante.dibujarImagen('imagenes/mensaje_gameover.png', 0, 5, this.anchoCanvas, this.altoCanvas);
     document.getElementById('reiniciar').style.visibility = 'visible';
   }
 
   // Si se gano el juego hay que mostrar el mensaje de ganoJuego de fondo
   else if (this.ganoJuego()) {
+    this.gameOver = true;
     Dibujante.dibujarImagen('imagenes/Splash.png', 190, 113, 500, 203);
     document.getElementById('reiniciar').style.visibility = 'visible';
   } else {
