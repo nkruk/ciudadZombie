@@ -105,8 +105,8 @@ Juego.iniciarRecursos = function() {
     'imagenes/auto_rojo_izquierda.png',
     'imagenes/auto_verde_abajo.png',
     'imagenes/auto_verde_derecha.png',
-    "imagenes/mensaje1.png",
-    "imagenes/mensaje2.png",
+    "imagenes/Mensaje1.png",
+    "imagenes/Mensaje2.png",
  /*    "sound/music.mp3" */
   ]);
   Resources.onReady(this.presentacion.bind(Juego));
