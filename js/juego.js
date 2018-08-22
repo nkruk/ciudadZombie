@@ -18,6 +18,7 @@ var Juego = {
   gameOver: false,
   backgroundMusic: undefined,
   scream: undefined,
+  bounce: undefined,
 
   obstaculosCarretera: [
     /*Aca se van a agregar los obstaculos visibles. */
@@ -152,6 +153,8 @@ Juego.presentacion = function() {
 
   this.backgroundMusic = new Sound("sound/music.mp3");
   this.scream = new Sound("sound/scream.mp3");
+  this.bounce = new Sound("sound/bounce.mp3");
+
 
   Dibujante.dibujarImagen('imagenes/Mensaje1.png', 0, 5, 961, 577);
   setTimeout(borrarMensaje1, 3000);
