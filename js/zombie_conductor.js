@@ -35,11 +35,7 @@ ZombieConductor.prototype.mover = function() {
   if ((this.y < this.rangoMov.desdeY) || (this.y > this.rangoMov.hastaY)){
     this.velocidad *= -1;
   }  
-  // Si sobrepasa el rangoY, lo manda al centro entre ambos rangos
-  /* if ((this.y < this.rangoMov.desdeY) || (this.y > this.rangoMov.hastaY)) {
-    this.y = this.rangoMov.desdeY + (this.rangoMov.hastaY - this.rangoMov.desdeY)/2;
-  } */
-}
+},
 
 ZombieConductor.prototype.atacar = function(jugador) {
   jugador.perderVidas(5);

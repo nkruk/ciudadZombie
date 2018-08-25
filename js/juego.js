@@ -7,7 +7,6 @@ texto COMPLETAR que deben completarse segun lo indique la consigna.
 
 El objeto Juego contiene mucho codigo. Tomate tu tiempo para leerlo tranquilo
 y entender que es lo que hace en cada una de sus partes. */
-
 var Juego = {
   // Aca se configura el tamanio del canvas del juego
   anchoCanvas: 961,
@@ -16,9 +15,6 @@ var Juego = {
   vidasInicial: Jugador.vidas,
   // Indica si el jugador gano
   gameOver: false,
-  backgroundMusic: undefined,
-  scream: undefined,
-  bounce: undefined,
 
   obstaculosCarretera: [
     /*Aca se van a agregar los obstaculos visibles. */
@@ -81,9 +77,13 @@ var Juego = {
     new ZombieCaminante('imagenes/zombie1.png',610,300,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
     new ZombieCaminante('imagenes/zombie4.png',780,500,30,30, 7, {desdeX: 780, hastaX: 900, desdeY: 0, hastaY: 577}),
 
-  ]
+  ],
 
-}
+  backgroundMusic: new Sound("sound/music.mp3"),
+  scream : new Sound("sound/scream.mp3"),
+  bounce : new Sound("sound/bounce.mp3")
+
+};
 
 /* Se cargan los recursos de las imagenes, para tener un facil acceso
 a ellos. No hace falta comprender esta parte. Pero si queres agregar tus propies
@@ -120,53 +120,25 @@ Juego.obstaculos = function() {
   return this.obstaculosCarretera.concat(this.bordes);
 };
 
+// Dibuja el mensaje 1, lo borra, dibuja el mensaje 2, y luego inicia comenzar.
+
 Juego.presentacion = function() {
-  function borrarMensaje1() {
-    Dibujante.borrarAreaDeJuego();
-  };
-
-  function apareceMensaje2() {
-    Dibujante.dibujarImagen('imagenes/Mensaje2.png', 0, 5, 961, 577);
-  };
-
-  function comienzaJuego() {
-    Juego.comenzar();
-  }
-  
-
   Dibujante.inicializarCanvas(this.anchoCanvas, this.altoCanvas);
-
-  var Sound = function(src) {
-    this.audioElement = document.createElement("audio");
-    this.audioElement.src = src;
-    this.audioElement.setAttribute("preload", "auto");
-    this.audioElement.setAttribute("controls", "none");
-    this.audioElement.style.display = "none";
-    document.body.appendChild(this.audioElement);
-    this.play = function(){
-        this.audioElement.play();
-    }
-    this.stop = function(){
-        this.audioElement.pause();
-    }
-  };
-
-  this.backgroundMusic = new Sound("sound/music.mp3");
-  this.scream = new Sound("sound/scream.mp3");
-  this.bounce = new Sound("sound/bounce.mp3");
-
-
   Dibujante.dibujarImagen('imagenes/Mensaje1.png', 0, 5, 961, 577);
-  setTimeout(borrarMensaje1, 3000);
-  setTimeout(apareceMensaje2, 3001);
-  setTimeout(comienzaJuego, 5500);
+  setTimeout(function() {
+    Dibujante.borrarAreaDeJuego();
+  }, 3000);
+  setTimeout(function() {
+    Dibujante.dibujarImagen('imagenes/Mensaje2.png', 0, 5, 961, 577);
+  }, 3001);
+  setTimeout(function() {
+    Juego.comenzar();
+  }, 5500);
 };
 
 Juego.comenzar = function() {
   // Inicializar el canvas del juego
-
   Dibujante.inicializarCanvas(this.anchoCanvas, this.altoCanvas);
-
   /* El bucle principal del juego se llamara continuamente para actualizar
   los movimientos y el pintado de la pantalla. Sera el encargado de calcular los
   ataques, colisiones, etc*/
@@ -174,7 +146,6 @@ Juego.comenzar = function() {
 };
 
 Juego.buclePrincipal = function() {
-
   // Con update se actualiza la logica del juego, tanto ataques como movimientos
   this.update();
   // Funcion que dibuja por cada fotograma a los objetos en pantalla.
@@ -215,11 +186,9 @@ Juego.capturarMovimiento = function(tecla) {
   // Si se puede mover hacia esa posicion hay que hacer efectivo este movimiento
   if (this.chequearColisiones(movX + this.jugador.x, movY + this.jugador.y)) {
     /* Aca tiene que estar la logica para mover al jugador invocando alguno
-    de sus metodos. Punto B, guía 2. */
+    de sus metodos.*/
     Jugador.mover(movX, movY, tecla);
-    } /* else {
-      Jugador.mover(movX, movY, tecla, false);
-    } */
+    } 
 };
 
 
@@ -231,14 +200,11 @@ Juego.dibujar = function() {
 
   /* "Dibujante dibuja al jugador"  Si perdió no vuelve a pintar los objetos del juego. */
   if (!this.gameOver) {
-
   Dibujante.dibujarEntidad(Jugador);
-
   // Se recorren los obstaculos de la carretera pintandolos
   this.obstaculosCarretera.forEach(function(obstaculo) {
     Dibujante.dibujarEntidad(obstaculo);
   });
-
   // Se recorren los enemigos pintandolos
   this.enemigos.forEach(function(enemigo) {
     Dibujante.dibujarEntidad(enemigo);
@@ -319,6 +285,7 @@ Juego.dibujarFondo = function() {
   // Si se gano el juego hay que mostrar el mensaje de ganoJuego de fondo
   else if (this.ganoJuego()) {
     this.gameOver = true;
+    this.vidasInicial = 10000;
     Dibujante.dibujarImagen('imagenes/Splash.png', 190, 113, 500, 203);
     document.getElementById('reiniciar').style.visibility = 'visible';
   } else {
