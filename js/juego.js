@@ -238,7 +238,7 @@ se ven las colisiones con los obstaculos. En este caso sera con los zombies. */
 Juego.calcularAtaques = function() {
   this.enemigos.forEach(function(enemigo) {
     if (this.intersecan(enemigo, this.jugador, this.jugador.x, this.jugador.y)) {
-      enemigo.comenzarAtaque(this.jugador);
+      enemigo.comenzarAtaque(Jugador);
     } else {
       enemigo.dejarDeAtacar();
     }
