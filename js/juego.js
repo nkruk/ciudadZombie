@@ -58,25 +58,13 @@ var Juego = {
   ],
   // Los enemigos se agregaran en este arreglo.
   enemigos: [
-    new ZombieConductor('imagenes/tren_vertical.png',644,0,30,90,10, {desdeX: 644, hastaX: 644, desdeY: 0, hastaY: 800},"v"),
-    new ZombieConductor('imagenes/tren_vertical.png',678,0,30,90,10, {desdeX: 678, hastaX: 678, desdeY: 0, hastaY: 977},"v"),
-    new ZombieConductor('imagenes/tren_horizontal.png',400,322,90,30,10,{desdeX: 0, hastaX: 961, desdeY: 322, hastaY: 322},"h"),
+    new ZombieConductor('imagenes/tren_vertical.png',644,0,30,90,3, {desdeX: 644, hastaX: 644, desdeY: 0, hastaY: 800},"v"),
+    new ZombieConductor('imagenes/tren_vertical.png',678,0,30,90,6, {desdeX: 678, hastaX: 678, desdeY: 0, hastaY: 977},"v"),
+    new ZombieConductor('imagenes/tren_horizontal.png',400,322,90,30,4,{desdeX: 0, hastaX: 961, desdeY: 322, hastaY: 322},"h"),
     new ZombieCaminante('imagenes/zombie1.png',100,470,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
     new ZombieCaminante('imagenes/zombie2.png',120,450,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
     new ZombieCaminante('imagenes/zombie3.png',140,410,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
     new ZombieCaminante('imagenes/zombie4.png',180,440,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
-    new ZombieCaminante('imagenes/zombie1.png',160,390,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
-    new ZombieCaminante('imagenes/zombie1.png',500,170,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
-    new ZombieCaminante('imagenes/zombie2.png',520,200,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
-    new ZombieCaminante('imagenes/zombie3.png',540,220,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
-    new ZombieCaminante('imagenes/zombie4.png',580,240,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
-    new ZombieCaminante('imagenes/zombie1.png',600,290,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
-    new ZombieCaminante('imagenes/zombie2.png',620,300,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
-    new ZombieCaminante('imagenes/zombie3.png',640,420,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
-    new ZombieCaminante('imagenes/zombie4.png',630,380,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
-    new ZombieCaminante('imagenes/zombie1.png',610,300,10,10, 1, {desdeX: 0, hastaX: 961, desdeY: 0, hastaY: 577}),
-    new ZombieCaminante('imagenes/zombie4.png',780,500,30,30, 7, {desdeX: 780, hastaX: 900, desdeY: 0, hastaY: 577}),
-
   ],
 
   backgroundMusic: new Sound("sound/music.mp3"),
@@ -170,16 +158,16 @@ Juego.capturarMovimiento = function(tecla) {
   if (tecla) {
       this.backgroundMusic.play();
   }
-  if (tecla == 'der') {
+  if (tecla === 'der') {
     movX = velocidad;
   }
-  if (tecla == 'abajo') {
+  if (tecla === 'abajo') {
     movY = velocidad;
   }
-  if (tecla == 'izq') {
+  if (tecla === 'izq') {
     movX = -velocidad;
   }
-  if (tecla == 'arriba') {
+  if (tecla === 'arriba') {
     movY = -velocidad;
   }
 
@@ -229,7 +217,7 @@ Juego.moverEnemigos = function() {
   this.enemigos.forEach(function(enemigo) {
     enemigo.mover();
   });
-}, 
+};
 
 /* Recorre los enemigos para ver cual esta colisionando con el jugador
 Si colisiona empieza el ataque el zombie, si no, deja de atacar.
